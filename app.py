@@ -7,7 +7,7 @@ import re
 
 from langchain_classic.agents import create_tool_calling_agent, AgentExecutor
 from langchain_core.messages import HumanMessage, AIMessage
-from langchain_google_genai import ChatGoogleGenerativeAI  # Importa a classe para Gemini
+from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_core.tools import tool
 from dotenv import load_dotenv
