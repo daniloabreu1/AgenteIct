@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual Bank</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="chat-header">
+            <div class="header-content">
+                <div class="bank-logo">
+                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="40" height="40" rx="8" fill="#0066CC"/>
+                        <path d="M20 10L10 16V18H30V16L20 10Z" fill="white"/>
+                        <path d="M12 20H14V28H12V20Z" fill="white"/>
+                        <path d="M18 20H20V28H18V20Z" fill="white"/>
+                        <path d="M24 20H26V28H24V20Z" fill="white"/>
+                        <path d="M10 30H30V32H10V30Z" fill="white"/>
+                    </svg>
+                </div>
+                <div class="header-info">
+                    <h1>Chat Virtual Bank</h1>
+                    <p class="status">
+                        <span class="status-indicator"></span>
+                        Online
+                    </p>
+                </div>
+            </div>
+            <button class="logout-btn" id="logoutBtn" style="display: none;">Sair</button>
+        </div>
+
+        <div class="chat-container" id="chatContainer">
+            <div class="welcome-message">
+                <div class="bot-avatar">
+                    <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="25" cy="25" r="25" fill="#E3F2FD"/>
+                        <path d="M25 15C19.48 15 15 19.48 15 25C15 30.52 19.48 35 25 35C30.52 35 35 30.52 35 25C35 19.48 30.52 15 25 15ZM25 20C26.66 20 28 21.34 28 23C28 24.66 26.66 26 25 26C23.34 26 22 24.66 22 23C22 21.34 23.34 20 25 20ZM25 32.2C22.5 32.2 20.29 30.92 19 29C19.03 26.99 23 25.9 25 25.9C26.99 25.9 30.97 26.99 31 29C29.71 30.92 27.5 32.2 25 32.2Z" fill="#0066CC"/>
+                    </svg>
+                </div>
+                <h2>Oi! Bem-vindo ao Virtual Bank</h2>
+                <p>Sou a Avi, sua assistente virtual e estou aqui para ajudar com:</p>
+                <ul class="features-list">
+                    <li>💰 Consulta de saldo e extrato</li>
+                    <li>💳 Informações sobre produtos e serviços</li>
+                    <li>🔄 Orientações sobre transferências e pagamentos</li>
+                    <li>❓ Respostas para suas dúvidas frequentes</li>
+                </ul>
+                <p class="start-message">Para começar, por favor informe seu <strong>CPF</strong> (apenas números):</p>
+            </div>
+        </div>
+
+        <div class="chat-input-container">
+            <div class="input-wrapper">
+                <input
+                    type="text"
+                    id="messageInput"
+                    placeholder="Digite sua mensagem..."
+                    autocomplete="off"
+                >
+                <button id="sendBtn" class="send-btn">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M2.01 21L23 12L2.01 3L2 10L17 12L2 14L2.01 21Z" fill="currentColor"/>
+                    </svg>
+                </button>
+            </div>
+            <p class="disclaimer">Este é um ambiente de demonstração. Não compartilhe dados reais.</p>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
