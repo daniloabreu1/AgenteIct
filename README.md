@@ -2,7 +2,7 @@
 
 ## 1. Introdução
 
-Este documento serve como a **documentação** para o projeto de um chatbot de atendimento ao cliente, desenvolvido como uma tarefa de seleção. O chatbot é projetado para um grande banco, visando otimizar a interação com o cliente, reduzir a carga sobre os canais tradicionais e fornecer suporte eficiente e seguro. A solução abrange desde a concepção conceitual até a implementação técnica em Python com interface web, além de um plano de testes e validação.
+Este material serve como a **documentação** para o projeto de um chatbot de atendimento ao cliente, desenvolvido como uma atividade de um processo de seleção. O chatbot é projetado para um banco, visando otimizar a interação com o cliente, reduzir a carga sobre os canais tradicionais e fornecer suporte eficiente e seguro. A solução abrange desde a concepção conceitual até a implementação técnica em Python com interface web, além de um plano de testes e validação.
 
 ## 2. Apresentação Conceitual do Modelo de Chatbot
 
@@ -94,6 +94,7 @@ O arquivo `app.py` é o coração do backend, implementando as seguintes funcion
 *   **`index.html`:** A página principal que carrega a interface do chatbot. Inclui a estrutura básica, o cabeçalho, a área de mensagens e o campo de entrada.
 *   **`static/css/style.css`:** Define a estilização visual do chatbot, garantindo um design moderno, responsivo e alinhado com a identidade de um banco. Inclui estilos para mensagens, cabeçalho, campo de entrada e animações.
 *   **`static/js/script.js`:** Gerencia a interatividade do chatbot:
+    *   **`Reconhecimento de Voz`:** Integra a Web Speech API para permitir que o usuário interaja por voz. Um novo botão de microfone (`#voiceBtn`) inicia e para a gravação. A fala do usuário é transcrita para texto e preenche o campo de mensagem (`#messageInput`). **Ao finalizar a transcrição, a mensagem é enviada automaticamente** para o chatbot, otimizando a fluidez da interação por voz. 
     *   **`sendMessage()`:** Captura a mensagem do usuário, envia para o backend via API (`/api/chat`), exibe a mensagem do usuário e a resposta do bot na interface.
     *   **`addMessage(text, sender)`:** Adiciona uma nova bolha de mensagem ao chat, formatando o texto e a hora.
     *   **`showTypingIndicator()` / `removeTypingIndicator()`:** Exibe e remove um indicador visual quando o bot está "digitando".

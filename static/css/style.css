@@ -311,6 +311,43 @@ body {
     cursor: not-allowed;
 }
 
+.voice-btn {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, #ff753e 0%, #ff4800 100%);
+    border: none;
+    border-radius: 50%;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.voice-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(255, 72, 0, 0.3);
+}
+
+.voice-btn:active {
+    transform: scale(0.95);
+}
+
+.voice-btn.listening {
+    background: linear-gradient(135deg, #ff1744 0%, #d50000 100%);
+    animation: pulse-voice 1s infinite;
+}
+
+@keyframes pulse-voice {
+    0%, 100% {
+        box-shadow: 0 0 0 0 rgba(255, 23, 68, 0.7);
+    }
+    50% {
+        box-shadow: 0 0 0 10px rgba(255, 23, 68, 0);
+    }
+}
+
 .disclaimer {
     font-size: 0.75rem;
     color: #999;

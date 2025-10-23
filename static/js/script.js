@@ -2,15 +2,29 @@ const chatContainer = document.getElementById('chatContainer');
 const messageInput = document.getElementById('messageInput');
 const sendBtn = document.getElementById('sendBtn');
 const logoutBtn = document.getElementById('logoutBtn');
+const voiceBtn = document.getElementById('voiceBtn');
 
 let isAuthenticated = false;
 let isWaitingResponse = false;
 let isWaitingPassword = false;
+let isListening = false;
+let isVoiceInput = false;
+
+const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+let recognition;
+
+if (SpeechRecognition) {
+    recognition = new SpeechRecognition();
+    recognition.lang = 'pt-BR';
+    recognition.continuous = false;
+    recognition.interimResults = true;
+}
 
 document.addEventListener('DOMContentLoaded', () => {
     messageInput.focus();
 
     sendBtn.addEventListener('click', sendMessage);
+    voiceBtn.addEventListener('click', toggleVoiceRecognition);
     messageInput.addEventListener('keypress', (e) => {
         if (e.key === 'Enter' && !e.shiftKey) {
             e.preventDefault();
@@ -19,7 +33,63 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     logoutBtn.addEventListener('click', logout);
+
+    if (recognition) {
+        recognition.onstart = () => {
+            isListening = true;
+            voiceBtn.classList.add('listening');
+        };
+
+        recognition.onresult = (event) => {
+            let interimTranscript = '';
+            let finalTranscript = '';
+
+            for (let i = event.resultIndex; i < event.results.length; i++) {
+                const transcript = event.results[i][0].transcript;
+
+                if (event.results[i].isFinal) {
+                    finalTranscript += transcript + ' ';
+                } else {
+                    interimTranscript += transcript;
+                }
+            }
+
+            messageInput.value = finalTranscript || interimTranscript;
+        };
+
+        recognition.onerror = (event) => {
+            console.error('Erro no reconhecimento de voz:', event.error);
+            addMessage('Desculpe, houve um erro ao reconhecer sua voz: ' + event.error, 'bot');
+        };
+
+        recognition.onend = () => {
+            isListening = false;
+            voiceBtn.classList.remove('listening');
+            if (isVoiceInput && messageInput.value.trim()) {
+                isVoiceInput = false;
+                setTimeout(() => {
+                    sendMessage();
+                }, 300);
+            }
+        };
+    }
 });
+
+function toggleVoiceRecognition() {
+    if (!recognition) {
+        addMessage('Desculpe, seu navegador nao suporta reconhecimento de voz. Por favor, use um navegador moderno como Chrome, Edge ou Safari.', 'bot');
+        return;
+    }
+
+    if (isListening) {
+        recognition.stop();
+        isListening = false;
+    } else {
+        messageInput.value = '';
+        isVoiceInput = true;
+        recognition.start();
+    }
+}
 
 async function sendMessage() {
     const message = messageInput.value.trim();
